@@ -1,0 +1,15 @@
+ARG BOOKWORM_VERSION="UNDEFINED"
+
+FROM docker.io/debian:${BOOKWORM_VERSION} 
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN cd /tmp \
+ && apt-get -q -y update \
+ && apt-get \
+      -o Dpkg::Options::="--force-confdef" \
+      -o Dpkg::Options::="--force-confold" \
+      -q -y install \
+      build-essential \
+ && rm -rf /var/lib/apt/lists/*
+
