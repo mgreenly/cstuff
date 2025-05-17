@@ -1,3 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <yaml.h>
+
 size_t ask(char *prompt, char **buffer_ptr, size_t *buffer_size, FILE *stream){
   char *buffer = *buffer_ptr;
   size_t chars_read = 0;

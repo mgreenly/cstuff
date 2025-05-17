@@ -2,8 +2,7 @@ with import <nixpkgs> {}; stdenv.mkDerivation {
 
   name = "demo";
 
-  src = ./src;
-  includes = ./includes;
+  src = ./.;
 
   nativeBuildInputs = with pkgs; [
     pkg-config
@@ -13,7 +12,11 @@ with import <nixpkgs> {}; stdenv.mkDerivation {
 
   buildPhase = ''
     mkdir -p "$out/bin"
-    gcc -o $out/bin/demo $src/foo.c $src/main.c -I$includes `pkg-config --cflags yaml-0.1 sqlite3` -Wall -Wextra -pedantic -std=c18  -lyaml -lsqlite3
+    make bin/$name
+  '';
+
+  installPhase = ''
+    cp bin/* $out/bin/
   '';
 
 }

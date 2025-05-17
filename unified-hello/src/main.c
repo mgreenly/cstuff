@@ -1,16 +1,14 @@
 #define  _POSIX_C_SOURCE 200809L
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <yaml.h>
+#define DEMO_VERSION_MAJOR 0
+#define DEMO_VERSION_MINOR 1
+#define DEMO_VERSION_PATCH 2
 
-#include "demo.h"
 #include "foo.c"
 
 #if defined(test)
-  #include "unity.c"
-  #include "test.c"
+  #include "test/unity.c"
+  #include "test/test.c"
 #else
   #include "demo.c"
 #endif

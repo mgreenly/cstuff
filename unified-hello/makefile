@@ -1,15 +1,17 @@
 #
-# Update the name and list of libs for the project.
+# Update the program name and list of libs.
 #
+
 NAME = demo
 LIBS = yaml-0.1 sqlite3
 
 #
-# In most cases nothing below should need to change.
+# In most cases there's no reason to change anything below this.
 #
 
 CFLAGS = -Wall -Wextra -pedantic -std=c18 $(shell pkg-config --cflags $(LIBS))
 LDFLAGS = $(shell pkg-config --libs $(LIBS))
+CHECKS = -fsanitize=address,undefined
 
 bin/$(NAME): $(wildcard src/*) makefile
 	mkdir -p bin
@@ -17,7 +19,10 @@ bin/$(NAME): $(wildcard src/*) makefile
 
 bin/$(NAME)_test: $(wildcard src/*) makefile
 	mkdir -p bin
-	$(CC) -Dtest -o bin/$(NAME)_test src/main.c $(CFLAGS) $(LDFLAGS)
+	$(CC) -Dtest -o bin/$(NAME)_test src/main.c $(CHECKS) $(CFLAGS) $(LDFLAGS)
+
+PHONY: all
+all: bin/$(NAME) bin/$(NAME)_test
 
 PHONY: test
 test: bin/$(NAME)_test
@@ -27,6 +32,10 @@ PHONY: run
 run: bin/$(NAME)
 	@clear
 	@./bin/$(NAME)
+
+PHONY: install
+install: all
+	cp bin/$(NAME) ~/.local/bin/
 
 PHONY: clean
 clean:
