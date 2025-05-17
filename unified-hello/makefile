@@ -1,12 +1,12 @@
 #
-# Set the program name and set the list of libs.
+# Set the program's name the library dependencies.
 #
 
 NAME = demo
 LIBS = yaml-0.1 sqlite3
 
 #
-# In most cases there's no reason to change any of the following.
+# In most cases there's no need to change anything else.
 #
 
 CFLAGS = -Wall -Wextra -pedantic -std=c18 $(shell pkg-config --cflags $(LIBS))
