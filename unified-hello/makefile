@@ -1,5 +1,5 @@
 #
-# Set the program's name the library dependencies.
+# Set the program's name and the library dependencies.
 #
 
 NAME = demo
