@@ -1,6 +1,0 @@
-ARG ALPINE_VERSION="UNDEFINED"
-
-FROM docker.io/alpine:${ALPINE_VERSION}
-
-RUN echo "hello" \
- && apk add --no-cache alpine-sdk
